@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP - Sistema de Cadastramento de Produtos - C#</title>
+    <link rel="icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/product-5806313-4863042.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">SCP - Sistema de Cadastramento de Produtos</h1>
+
+        <h2 class="mb-4">Cadastrar Produto</h2>
+        <form id="productForm" class="mb-4">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control" id="descricao" required>
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço</label>
+                <input type="number" class="form-control" id="preco" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select class="form-control" id="categoria" required>
+                    <option value="Eletronicos">Eletrônicos</option>
+                    <option value="Roupas">Roupas</option>
+                    <option value="Outros">Outros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fornecedor">Fornecedor</label>
+                <select class="form-control" id="fornecedor" required>
+                    <option value="Fornecedor A">Fornecedor A</option>
+                    <option value="Fornecedor B">Fornecedor B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estoque">Fornecedor</label>
+                <select class="form-control" id="estoque" required>
+                    <option value="Armazen 01 - 100">Armazen 01 - 100</option>
+                    <option value="Armazen 02 - 50">Armazen 02 - 50</option>
+                </select>
+            </div>
+            <div class="btn-center">
+                <button type="submit" class="btn btn-info text-center">Cadastrar Produto</button>
+            </div>
+           
+        </form>
+
+        
+        <div class="table-responsive">
+
+        <table id="productList" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Categoria</th>
+                    <th>Fornecedor</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="productList"></tbody>
+        </table>
+        <div id="noProductsMessage" class="alert alert-info" role="alert" style="display: none;">
+            Sem produtos cadastrados.
+        </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="editForm">
+                    <div class="modal-body">
+                        <input type="hidden" id="editId">
+                        <div class="form-group">
+                            <label for="editNome">Nome</label>
+                            <input type="text" class="form-control" id="editNome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescricao">Descrição</label>
+                            <input type="text" class="form-control" id="editDescricao" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPreco">Preço</label>
+                            <input type="number" class="form-control" id="editPreco" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategoria">Categoria</label>
+                            <select class="form-control" id="editCategoria" required>
+                                <option value="Eletronicos">Eletrônicos</option>
+                                <option value="Roupas">Roupas</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFornecedor">Fornecedor</label>
+                            <select class="form-control" id="editFornecedor" required>
+                                <option value="Fornecedor A">Fornecedor A</option>
+                                <option value="Fornecedor B">Fornecedor B</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEstoque">Fornecedor</label>
+                            <select class="form-control" id="editEstoque" required>
+                                <option value="Armazen 01 - 100">Armazen 01 - 100</option>
+                                <option value="Armazen 02 - 50">Armazen 02 - 50</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
